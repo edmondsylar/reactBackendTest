@@ -35,7 +35,7 @@ class dbModal:
             }
             genders.append(obj)
 
-        return (json(genders))
+        return (jsonify(genders))
 
     def search(self, name):
         results = []
