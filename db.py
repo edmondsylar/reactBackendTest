@@ -51,4 +51,5 @@ class dbModal:
             }
             results.append(res)
 
+        print (results)
         return (jsonify(results))
