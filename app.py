@@ -16,7 +16,8 @@ def default():
     return (defaultCheck)
 
 
-@app.route('/search', methods=['POST', 'GET'])
+@app.route("/search", methods=['POST', 'GET'])
+@cross_origin()
 def search():
     name = request.json['name']
     req = user.search(name)
