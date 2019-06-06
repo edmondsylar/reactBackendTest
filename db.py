@@ -5,7 +5,7 @@ import uuid;
 connection = {
     'user':'devops',
     'host':'localhost',
-    'database':'astutePoduction',
+    'database':'astuteProduction',
     'password':'password'
 }
 
