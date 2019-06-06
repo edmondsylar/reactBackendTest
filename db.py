@@ -3,13 +3,13 @@ from flask import jsonify
 import uuid;
 
 connection = {
-    # 'user':'devops',
-    'user':'root',
+    'user':'devops',
+    # 'user':'root',
     'host':'localhost',
     'database':'astuteProduction',
     # 'database':'astuteproduction',
-    'password':None
-    # 'password':'password'
+    # 'password':None
+    'password':'password'
 }
 
 genders = []
