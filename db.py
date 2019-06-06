@@ -3,10 +3,13 @@ from flask import jsonify
 import uuid;
 
 connection = {
-    'user':'devops',
+    # 'user':'devops',
+    'user':'root',
     'host':'localhost',
     'database':'astuteProduction',
-    'password':'password'
+    # 'database':'astuteproduction',
+    'password':None
+    # 'password':'password'
 }
 
 genders = []
@@ -40,14 +43,15 @@ class dbModal:
     def search(self, name):
         results = []
 
-        sql = "select name,prifileType from t_profiles where name like '%{}%'".format(name)
+        sql = "select name,prifileType, profileUuid from t_profiles where name like '%{}%'".format(name)
         self.cur.execute(sql)
         data = self.cur.fetchall()
         
-        for n, t in data:
+        for n, t, y in data:
             res = {
                 'name':n,
-                'type':t
+                'type':t,
+                'id':y
             }
             results.append(res)
 
