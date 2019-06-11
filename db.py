@@ -83,5 +83,5 @@ class dbModal:
             }
             counts.append(country)
 
-        return (counts)
+        return (jsonify(counts))
 
