@@ -85,3 +85,20 @@ class dbModal:
 
         return (jsonify(counts))
 
+
+def bssTppes(self):
+        bsts = []
+
+        regtypes = "select id, name from t_registrationtypes"
+        self.cur.execute(regtypes)
+        bstypz = self.cur.fetchall()
+
+        for i, c in bstypz:
+            business = {
+                'id':i,
+                'name': c
+            }
+            bsts.append(business)
+
+        return (jsonify(bsts))
+
