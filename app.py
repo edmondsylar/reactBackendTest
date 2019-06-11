@@ -42,7 +42,7 @@ def country():
 @app.route('/businessTypes', methods=['GET', 'POST'])
 @cross_origin()
 def businessTypes():
-	bst = user.bssTppes()
+	bst = user.bssTypes()
 
 	return (bst)
 
