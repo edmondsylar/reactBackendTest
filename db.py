@@ -72,7 +72,7 @@ class dbModal:
     def countries(self):
         counts = []
 
-        countrySql = "select (id, name) from t_country"
+        countrySql = "select id, name from t_country"
         self.cur.execute(countrySql)
         countryz = self.cur.fetchall()
 

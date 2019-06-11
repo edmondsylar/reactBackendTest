@@ -32,12 +32,12 @@ def register_business(name, regno, bsstype, regcountry, regdate):
 	return(register)
 
 
-@app.route('/countres', methods=['GET'])
+@app.route('/countres', methods=['GET', 'POST'])
 @cross_origin()
 def country():
-	countries = user.countries()
+	countryReturn = user.countries()
 
-	return (countries)
+	return (countryReturn)
 
 if __name__=='__main__':
     app.run(debug=True, host='0.0.0.0')
