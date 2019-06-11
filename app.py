@@ -24,5 +24,13 @@ def search(name):
     return (req)
 
 
+@app.route("/registerBusiness/<name>/<regno>/<bsstype>/<regcountry>/<regdate>" methods=['GET', 'POST'])
+@cross_origin()
+def register_business(name, regno, bsstype, regcountry, regdate):
+	register = user.regBss(name, regno, bsstype, regcountry, regdate)
+
+	return(register)
+
 if __name__=='__main__':
     app.run(debug=True, host='0.0.0.0')
+
