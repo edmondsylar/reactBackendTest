@@ -9,7 +9,8 @@ connection = {
     'database':'astuteProduction',
     # 'database':'astuteproduction',
     # 'password':None
-    'password':'password'
+    'password':'password',
+    'autocommit': True 
 }
 
 genders = []
@@ -56,3 +57,13 @@ class dbModal:
             results.append(res)
 
         return (jsonify(results))
+    def regBss(self, bssname, regno, bsstype, regcountry, regdate):
+        # table name t_business
+        Genid = uuid.uuid4()
+        success = "Business Created"
+        error = "Encontered errors while creating business"
+
+        BssCreatesql = "insert into t_business(businessUuid, businessName, businessTypeUuid, registrationNumber, registrationCountryid, registrationDate) VALUES ('{}', '{}', '{}', '{}', '{}', '{}')".format(Genid, bssname, bsstype, regno, regcountry, regdate)
+        self.cur.execute(BssCreatesql)
+        
+        return(jsonify({success: Genid}))

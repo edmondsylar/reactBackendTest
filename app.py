@@ -1,4 +1,4 @@
-from flask import Flask, request
+from flask import Flask, request, render_template
 from db import dbModal
 from flask_cors import CORS, cross_origin
 
@@ -12,8 +12,7 @@ cors = CORS(app, resources={r"/": {'origin': '*'}})
 @app.route('/')
 @cross_origin()
 def default():
-    defaultCheck = user.GenderCheck()
-    return (defaultCheck)
+    return render_template('index.html')
 
 
 @app.route("/search/<name>", methods=['POST', 'GET'])
