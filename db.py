@@ -67,3 +67,21 @@ class dbModal:
         self.cur.execute(BssCreatesql)
         
         return(jsonify({success: Genid}))
+
+
+    def countries(self):
+        counts = []
+
+        countrySql = "select (id, name) from t_country"
+        self.cur.execute(countrySql)
+        countryz = self.cur.fetchall()
+
+        for i, c in countryz:
+            country = {
+                'code':i,
+                'name': c
+            }
+            counts.append(country)
+
+        return (counts)
+
