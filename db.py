@@ -86,7 +86,7 @@ class dbModal:
         return (jsonify(counts))
 
 
-def bssTppes(self):
+    def bssTypes(self):
         bsts = []
 
         regtypes = "select id, name from t_registrationtypes"
