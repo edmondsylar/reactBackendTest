@@ -4,9 +4,7 @@ import uuid
 import time
 import sys
 import hashlib
-#from email import sendCode
-
-mailTo = sendCode()
+from emailer import sendCode
 
 connection = {
     'user':'devops',
@@ -135,13 +133,13 @@ class dbModal:
         passw = hashlib.md5(password.encode())
 
         if (status == 'proceed'):
-            msg = ('CODEC')
-            #code = mailTo(email)
+            msg = ('/home')
+            code = sendCode(email)
 
             sql = "insert into t_users_register(person_uid, names, gender, email, date_of_birth, password) VALUES ('{}', '{}','{}','{}','{}','{}')".format(personid, name, gender, email, dob, passw.hexdigest())
             self.cur.execute(sql)
 
-            return(msg)
+            return(code)
 
         else:
             msg = 'This user Exists already'
