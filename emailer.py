@@ -13,12 +13,15 @@ context = ssl.create_default_context()
 
 
 class sendCode:
-	def __init__(self, email):
+	def __init__(self):
+		x= []
+
+	def Start(self, email):
 		try:
 			key = randomStringDigits()
 
 			self.server = smtplib.SMTP(smtp_server, port)
-			selfserver.ehlo()
+			self.server.ehlo()
 			self.server.starttls(context=context)
 			self.server.ehlo()
 			self.server.login(sender_email, password)
@@ -33,3 +36,4 @@ class sendCode:
 		except Exception as e:
 			print (e)
 			return (e)
+

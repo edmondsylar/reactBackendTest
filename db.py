@@ -5,15 +5,16 @@ import time
 import sys
 import hashlib
 from emailer import sendCode
+verifyMail = sendCode()
 
 connection = {
-    'user':'devops',
-    # 'user':'root',
+    # 'user':'devops',
+    'user':'root',
     'host':'localhost',
-    'database':'astuteProduction',
-    # 'database':'astuteproduction',
-    # 'password':None,
-    'password':'password',
+    # 'database':'astuteProduction',
+    'database':'astuteproduction',
+    'password':None,
+    # 'password':'password',
     'autocommit': True 
 
 }
@@ -133,9 +134,10 @@ class dbModal:
         passw = hashlib.md5(password.encode())
 
         if (status == 'proceed'):
-            msg = ('/home')
-            code = sendCode(email)
-
+            print (status)
+            # msg = ('/home')
+            code = verifyMail.Start(email)
+            
             sql = "insert into t_users_register(person_uid, names, gender, email, date_of_birth, password) VALUES ('{}', '{}','{}','{}','{}','{}')".format(personid, name, gender, email, dob, passw.hexdigest())
             self.cur.execute(sql)
 
