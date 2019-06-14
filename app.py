@@ -46,8 +46,15 @@ def businessTypes():
 
 	return (bst)
 
+@app.route('/register/<name>/<email>/<gender>/<dob>/<password>')
+@cross_origin()
+def registerUser(name, email, gender, dob, password):
+	registerReturn = user.register(name, email, gender, dob, password)
+
+	return (registerReturn)
+
 
 
 if __name__=='__main__':
-    app.run(debug=True, host='0.0.0.0')
+    app.run(debug=True, host='0.0.0.0', port='5677')
 

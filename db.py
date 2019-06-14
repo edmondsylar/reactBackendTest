@@ -1,6 +1,9 @@
 import pymysql
 from flask import jsonify
-import uuid;
+import uuid
+import time
+import sys
+import hashlib
 
 connection = {
     'user':'devops',
@@ -8,7 +11,7 @@ connection = {
     'host':'localhost',
     'database':'astuteProduction',
     # 'database':'astuteproduction',
-    # 'password':None
+    # 'password':None,
     'password':'password',
     'autocommit': True 
 }
@@ -17,9 +20,29 @@ genders = []
 
 class dbModal:
     def __init__(self):
+
+        self.proceed = 'proceed'
+        self.exist = 'exist'
+
+
         self.conn = pymysql.connect(**connection)
         self.cur = self.conn.cursor()
         self.DbStatus()
+
+
+    def Checker(self, email):
+        sql = "select person_uid from t_users_register where email='{}'".format(email)
+        self.cur.execute(sql)
+        response = self.cur.fetchall()
+
+        if (len(response) >= 1):
+            print (self.exist)
+            return (self.exist)
+        else:
+            print(self.proceed)
+            return (self.proceed)
+
+
 
     def DbStatus(self):
         msg = "Databse connection active"
@@ -102,3 +125,20 @@ class dbModal:
 
         return (jsonify(bsts))
 
+    def register(self, name, email, gender, dob, password):
+        status = self.Checker(email)
+        personid = uuid.uuid4()
+        passw = hashlib.md5(password.encode())
+
+        if (status == 'proceed'):
+            msg = ('/home')
+
+            sql = "insert into t_users_register(person_uid, names, gender, email, date_of_birth, password) VALUES ('{}', '{}','{}','{}','{}','{}')".format(personid, name, gender, email, dob, passw.hexdigest())
+            self.cur.execute(sql)
+
+            return(msg)
+
+        else:
+            msg = 'This user Exists already'
+            # print ('This user Exists already')
+            return (msg)
