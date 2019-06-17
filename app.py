@@ -46,12 +46,12 @@ def businessTypes():
 
 	return (bst)
 
-@app.route('/register/<name>/<email>/<gender>/<dob>/<password>')
+@app.route('/business/<userid>')
 @cross_origin()
-def registerUser(name, email, gender, dob, password):
-	registerReturn = user.register(name, email, gender, dob, password)
+def business(userid):
+	businesses = user.business_fetch(userid)
 
-	return (registerReturn)
+	return (businesses)
 
 
 @app.route('/login/<email>/<password>', methods=['POST', 'GET'])

@@ -9,9 +9,9 @@ verifyMail = sendCode()
 
 connection = {
     # 'user':'devops',
-    'user':'root',
-    'host':'localhost',
-    'database':'astuteProduction',
+    'user':'Admin',
+    'host':'192.168.8.2',
+    'database':'astute-production',
     # 'database':'astuteproduction',
     'password':None,
     # 'password':'password',
@@ -128,25 +128,29 @@ class dbModal:
 
         return (jsonify(bsts))
 
-    def register(self, name, email, gender, dob, password):
-        status = self.Checker(email)
-        personid = uuid.uuid4()
-        passw = hashlib.md5(password.encode())
+    def business_fetch(self, userid):
 
-        if (status == 'proceed'):
-            print (status)
-            # msg = ('/home')
-            code = verifyMail.Start(email)
-            
-            sql = "insert into t_users_register(person_uid, names, gender, email, date_of_birth, password) VALUES ('{}', '{}','{}','{}','{}','{}')".format(personid, name, gender, email, dob, passw.hexdigest())
-            self.cur.execute(sql)
+        businesses = []
 
-            return(code)
+        sql_business_search = "SELECT assignedBy, assignedTo FROM `a_user_roles` WHERE assignedTo='{}'".format(userid)
 
-        else:
-            msg = 'This user Exists already'
-            # print ('This user Exists already')
-            return (msg)
+        self.cur.execute(sql_business_search)
+        results = self.cur.fetchall()
+
+        for admin, each_busniess in results:
+            business = {
+                'assignedBy':admin,
+                'business':each_busniess
+            }
+            if(business['business'] == ''):
+                pass 
+            else:
+                businesses.append(business)
+
+        return(jsonify(businesses))
+
+
+        
 
 
     def login(self, email, password):
@@ -157,10 +161,15 @@ class dbModal:
         self.cur.execute(sql_login)
         results = self.cur.fetchall()
 
-        for username, userid in results:
-            user = {
-                'username':username,
-                'id': userid
-            }
-            return (jsonify(user))
+        if(len(results) != 0):
+            for username, userid in results:
+                user = {
+                    'username':username,
+                    'id': userid
+                }
+                return (jsonify(user))
+
+        else:
+            status_code = '500'
+            return (status_code)
         
