@@ -8,13 +8,13 @@ from emailer import sendCode
 verifyMail = sendCode()
 
 connection = {
-    'user':'devops',
-    # 'user':'root',
+    # 'user':'devops',
+    'user':'root',
     'host':'localhost',
     'database':'astuteProduction',
     # 'database':'astuteproduction',
-    # 'password':None,
-    'password':'password',
+    'password':None,
+    # 'password':'password',
     'autocommit': True 
 
 }
@@ -147,3 +147,20 @@ class dbModal:
             msg = 'This user Exists already'
             # print ('This user Exists already')
             return (msg)
+
+
+    def login(self, email, password):
+        password_init = hashlib.md5(password.encode())
+        passw = password_init.hexdigest()
+
+        sql_login = "SELECT username, userUuid FROM t_users WHERE username='{}' AND password='{}'".format(email, passw)
+        self.cur.execute(sql_login)
+        results = self.cur.fetchall()
+
+        for username, userid in results:
+            user = {
+                'username':username,
+                'id': userid
+            }
+            return (jsonify(user))
+        

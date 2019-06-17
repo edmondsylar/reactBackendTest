@@ -54,6 +54,13 @@ def registerUser(name, email, gender, dob, password):
 	return (registerReturn)
 
 
+@app.route('/login/<email>/<password>', methods=['POST', 'GET'])
+@cross_origin()
+def loginRoute(email, password):
+	response = user.login(email, password)
+	return (response)
+
+
 
 if __name__=='__main__':
     app.run(debug=True, host='0.0.0.0', port='5677')
