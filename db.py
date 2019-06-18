@@ -10,10 +10,12 @@ verifyMail = sendCode()
 connection = {
     'user':'devops',
     'host':'localhost',
-    'database':'astuteproduction',
+    'database':'astuteProduction',
     'password':'password',
+
+    # This is a constant for all connections
     'autocommit': True 
-    
+
     # 'user':'Admin',
     # 'host':'192.168.8.2',
     # 'database':'astute-production',
