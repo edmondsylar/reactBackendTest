@@ -8,14 +8,16 @@ from emailer import sendCode
 verifyMail = sendCode()
 
 connection = {
-    # 'user':'devops',
-    'user':'Admin',
-    'host':'192.168.8.2',
-    'database':'astute-production',
-    # 'database':'astuteproduction',
-    'password':None,
-    # 'password':'password',
+    'user':'devops',
+    'host':'localhost',
+    'database':'astuteproduction',
+    'password':'password',
     'autocommit': True 
+    
+    # 'user':'Admin',
+    # 'host':'192.168.8.2',
+    # 'database':'astute-production',
+    # 'password':None,
 
 }
 
