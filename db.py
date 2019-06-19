@@ -157,7 +157,7 @@ class dbModal:
 
         businesses = []
 
-        sql_business_search = "SELECT `businessUid` FROM `a_user_roles` WHERE assignedTo='{}'".format(userid)
+        sql_business_search = "SELECT `businessUuid` FROM `a_user_roles` WHERE assignedTo='{}'".format(userid)
 
         self.cur.execute(sql_business_search)
         business_results = self.cur.fetchall()
