@@ -162,7 +162,7 @@ class dbModal:
         self.cur.execute(sql_business_search)
         business_results = self.cur.fetchall()
 
-        if (len(business_results) = 0):
+        if (len(business_results) == 0):
             for each in business_results:
                 for one in each:
                     businesses.append(one)
