@@ -14,11 +14,11 @@ connection = {
     'password':'password',
 
     # This is a constant for all connections
-    'autocommit': True 
+    'autocommit': True,
 
-    # 'user':'Admin',
-    # 'host':'192.168.8.2',
-    # 'database':'astute-production',
+    # 'user':'root',
+    # # 'host':'192.168.8.2',
+    # 'database':'astuteproduction',
     # 'password':None,
 
 }
@@ -130,31 +130,7 @@ class dbModal:
             }
             bsts.append(business)
 
-        return (jsonify(bsts))
-
-    def business_fetch(self, userid):
-
-        businesses = []
-
-        sql_business_search = "SELECT assignedBy, assignedTo FROM `a_user_roles` WHERE assignedTo='{}'".format(userid)
-
-        self.cur.execute(sql_business_search)
-        results = self.cur.fetchall()
-
-        for admin, each_busniess in results:
-            business = {
-                'assignedBy':admin,
-                'business':each_busniess
-            }
-            if(business['business'] == ''):
-                pass 
-            else:
-                businesses.append(business)
-
-        return(jsonify(businesses))
-
-
-        
+        return (jsonify(bsts))      
 
 
     def login(self, email, password):
@@ -176,4 +152,19 @@ class dbModal:
         else:
             status_code = '500'
             return (status_code)
+
+    def business_fetch(self, userid):
+
+        businesses = []
+
+        sql_business_search = "SELECT `businessUid` FROM `a_user_roles` WHERE assignedTo='{}'".format(userid)
+
+        self.cur.execute(sql_business_search)
+        business_results = self.cur.fetchall()
+
+        for each in business_results:
+            for one in each:
+                businesses.append(one)
+        
+        return(jsonify(businesses))
         
