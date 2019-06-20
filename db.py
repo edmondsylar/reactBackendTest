@@ -8,18 +8,18 @@ from emailer import sendCode
 verifyMail = sendCode()
 
 connection = {
-    'user':'devops',
-    'host':'localhost',
-    'database':'astuteProduction',
-    'password':'password',
+    # 'user':'devops',
+    # 'host':'localhost',
+    # 'database':'astuteProduction',
+    # 'password':'password',
 
     # This is a constant for all connections
     'autocommit': True,
 
-    # 'user':'Admin',
-    # 'host':'192.168.8.2',
-    # 'database':'astute-production',
-    # 'password':None,
+    'user':'Admin',
+    'host':'192.168.8.2',
+    'database':'astute-production',
+    'password':None,
 
 }
 
@@ -160,36 +160,39 @@ class dbModal:
         sql_business_search = "SELECT `businessUuid` FROM `a_user_roles` WHERE assignedTo='{}'".format(userid)
 
         self.cur.execute(sql_business_search)
-        business_results = self.cur.fetchall()
+        res = self.cur.fetchall()
 
-        if (len(business_results) != 0):
-            for each in business_results:
+        length = len(res)
+        if(length == 0):
+            print ('No return')
+
+            return (jsonify(length))
+        else:
+            for each in res:
                 for one in each:
                     businesses.append(one)
+            return (jsonify(businesses))
+
+
+
+    # def get_business(self, bss_uid):
+    #     get_bs = "SELECT businessName FROM t_business WHERE businessUuid = '{}'".format(bss_uid)
+
+    #     self.cur.execute(get_bs)
+
+    #     business = self.cur.fetchall()
+    #     if (len(business) == 0):
             
-            return(jsonify(businesses))
-        else:
-            status_code = '500'
-            return (status_code)
+    #         msg= (len(business))
 
-    def get_business(self, bss_uid):
-        get_bs = "SELECT businessName FROM t_business WHERE businessUuid = '{}'".format(bss_uid)
+    #         status_code = '404'
 
-        self.cur.execute(get_bs)
+    #         return(jsonify(msg))
 
-        business = self.cur.fetchall()
-        if (len(business) == 0):
-            
-            msg= (len(business))
-
-            status_code = '404'
-            
-            return(jsonify(msg))
-
-        else:
-            for each in business:
-                for one in each:
-                    return (one)
+    #     else:
+    #         for each in business:
+    #             for one in each:
+    #                 return (one)
 
 
         
