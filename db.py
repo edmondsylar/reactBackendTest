@@ -179,7 +179,6 @@ class dbModal:
 
         business = self.cur.fetchall()
         if (len(business) == 0):
-            pass
             status_code = '404'
             return(status_code)
 
