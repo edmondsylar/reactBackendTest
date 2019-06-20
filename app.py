@@ -61,6 +61,13 @@ def loginRoute(email, password):
 	return (response)
 
 
+@app.route('/get_business/<business_id>', methods=['POST', 'GET'])
+@cross_origin()
+def business_getter(business_id):
+	response = user.get_business(business_id)
+
+	return (response)
+
 
 if __name__=='__main__':
     app.run(debug=True, host='0.0.0.0', port='5677')
