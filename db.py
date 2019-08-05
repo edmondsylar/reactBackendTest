@@ -10,7 +10,7 @@ verifyMail = sendCode()
 connection = {
     'user':'root',
     'host':'localhost',
-    'database':'astute-poduction',
+    'database':'astute-production',
     # 'password':'password',
 
     # This is a constant for all connections
